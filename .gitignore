@@ -1,0 +1,4 @@
+.env
+CHECKLIST.md
+target/
+Cargo.lock
