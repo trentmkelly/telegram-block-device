@@ -2,3 +2,6 @@
 CHECKLIST.md
 target/
 Cargo.lock
+.tgdrive.session
+.tgdrive.session.*
+test-logs/

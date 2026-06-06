@@ -1,0 +1,19 @@
+[package]
+name = "tgdrive-telegram"
+version = "0.1.0"
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+anyhow.workspace = true
+async-trait.workspace = true
+futures.workspace = true
+grammers-client = { path = "../../vendor/grammers/grammers-client" }
+grammers-mtsender = { path = "../../vendor/grammers/grammers-mtsender" }
+grammers-session = { path = "../../vendor/grammers/grammers-session", default-features = false, features = ["serde"] }
+grammers-tl-types = { path = "../../vendor/grammers/grammers-tl-types" }
+serde_json.workspace = true
+tgdrive-core = { path = "../tgdrive-core" }
+tokio.workspace = true
+tracing.workspace = true

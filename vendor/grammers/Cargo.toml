@@ -1,0 +1,23 @@
+[workspace]
+members = [
+    "grammers",
+    "grammers-client",
+    "grammers-crypto",
+    "grammers-mtproto",
+    "grammers-mtsender",
+    "grammers-session",
+    "grammers-tl-gen",
+    "grammers-tl-parser",
+    "grammers-tl-types",
+]
+resolver = "2"
+
+[patch.crates-io]
+grammers-client = { path = "grammers-client" }
+grammers-crypto = { path = "grammers-crypto" }
+grammers-mtproto = { path = "grammers-mtproto" }
+grammers-mtsender = { path = "grammers-mtsender" }
+grammers-session = { path = "grammers-session" }
+grammers-tl-gen = { path = "grammers-tl-gen" }
+grammers-tl-parser = { path = "grammers-tl-parser" }
+grammers-tl-types = { path = "grammers-tl-types" }

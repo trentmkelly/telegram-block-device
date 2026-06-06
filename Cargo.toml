@@ -1,0 +1,38 @@
+[workspace]
+members = [
+    "crates/tgdrive-core",
+    "crates/tgdrive-telegram",
+    "crates/tgdrive-nbd",
+    "crates/tgdrive-cli",
+]
+resolver = "2"
+exclude = ["vendor/grammers"]
+
+[workspace.package]
+edition = "2021"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/trentmkelly/telegram-block-device"
+
+[workspace.dependencies]
+anyhow = "1.0.98"
+async-trait = "0.1.88"
+bytes = "1.10.1"
+clap = { version = "4.5.40", features = ["derive", "env"] }
+dirs = "6.0.0"
+dotenvy = "0.15.7"
+futures = "0.3.31"
+hex = "0.4.3"
+rand = "0.9.1"
+rusqlite = "0.37.0"
+serde = { version = "1.0.219", features = ["derive"] }
+serde_json = "1.0.140"
+sha2 = "0.10.9"
+tempfile = "3.20.0"
+thiserror = "2.0.12"
+time = { version = "0.3.41", features = ["formatting", "parsing", "serde"] }
+tokio = { version = "1.45.1", features = ["full"] }
+toml = "0.8.23"
+tracing = "0.1.41"
+tracing-subscriber = { version = "0.3.19", features = ["env-filter"] }
+uuid = { version = "1.17.0", features = ["v4", "serde"] }
+zstd = "0.13.3"
