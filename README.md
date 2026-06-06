@@ -21,3 +21,61 @@ can run on top of the exported device.
 The storage layer deliberately avoids native encryption. It behaves like a
 normal block device, so tools such as LUKS, ext4, and other standard Linux block
 stack components can be layered above it.
+
+## Build
+
+Requirements: Linux, Rust, `nbd-client`, and Telegram MTProto API credentials
+from `my.telegram.org`.
+
+```bash
+cargo build --workspace
+```
+
+Create a local `.env` file:
+
+```bash
+TELEGRAM_API_ID=...
+TELEGRAM_API_HASH=...
+TELEGRAM_CHANNEL_ID=-100...
+TELEGRAM_CHANNEL_TITLE=TGDrive
+TELEGRAM_SESSION_PATH=.tgdrive.session
+```
+
+Then authenticate and resolve the channel access hash:
+
+```bash
+cargo run -p tgdrive -- login
+cargo run -p tgdrive -- resolve-channel
+```
+
+## Use
+
+Format the remote block device metadata:
+
+```bash
+cargo run -p tgdrive -- format --size 64MiB --object-size 256KiB --force
+```
+
+Start the NBD export:
+
+```bash
+cargo run -p tgdrive -- serve-nbd --bind 127.0.0.1:10809 --export-name tgdrive --backend telegram
+```
+
+Attach and format from another shell:
+
+```bash
+sudo modprobe nbd max_part=8
+sudo nbd-client 127.0.0.1 10809 /dev/nbd0 -N tgdrive
+sudo mkfs.ext4 -F /dev/nbd0
+sudo mount -o noatime,nodiratime,commit=60 /dev/nbd0 /mnt/tgdrive
+```
+
+For encryption, put LUKS above `/dev/nbd0` before creating the filesystem.
+
+Useful checks:
+
+```bash
+cargo run -p tgdrive -- recover-from-remote
+cargo run -p tgdrive -- fsck
+```
